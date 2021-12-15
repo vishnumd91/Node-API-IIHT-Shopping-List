@@ -1,48 +1,42 @@
-const mongoose = require('mongoose');
-const ShoppingData = require('../models/shoppingList');
+const mongoose = require("mongoose");
+const ShoppingData = require("../models/shoppingList");
 
-const getItems = async(req,res) => {
-    try {
-        const shoppingItems = await ShoppingData.find();
+const getItems = async (req, res) => {
+  try {
+    const shoppingItems = await ShoppingData.find();
 
-        res.status(200).json(shoppingItems);
-    }
+    res.status(200).json(shoppingItems);
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
 
-    catch(error) {
-        res.status(404).json({message: error.message});
-    }
-}
+const addItems = async (req, res) => {
+  const item = req.body;
 
-const addItems = async(req,res) => {
-        const item = req.body;
+  const newPost = new ShoppingData(item);
 
-        const newPost = new ShoppingData(item);
+  try {
+    await newPost.save();
 
-        try {
+    res.status(201).json(newPost);
+  } catch (error) {
+    res.status(409).json({ message: error.message });
+  }
+};
 
-            await newPost.save()
+const deleteItems = async (req, res) => {
+  const { id } = req.params;
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).send("No items with that ID");
+  }
+  await ShoppingData.findByIdAndRemove(id);
 
-            res.status(201).json(newPost);
-        }
+  res.json({ message: "Deleted the Item Successfully" });
+};
 
-        catch(error) {
-            res.status(409).json({message: error.message});
-        }
-}
-
-const deleteItems = async(req, res) => {
-    const { id } = req.params;
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(404).send('No items with that ID');
-    }
-    await ShoppingData.findByIdAndRemove(id);
-
-    res.json({message: 'Deleted the Item Successfully'});
-}
-
-
-module.exports = { 
-    getItems,
-    addItems,
-    deleteItems,
- };
+module.exports = {
+  getItems,
+  addItems,
+  deleteItems,
+};

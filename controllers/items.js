@@ -5,9 +5,9 @@ const getItems = async (req, res) => {
   try {
     const shoppingItems = await ShoppingData.find();
 
-    res.status(200).json(shoppingItems);
+    return res.status(200).json(shoppingItems);
   } catch (error) {
-    res.status(404).json({ message: error.message });
+    return res.status(404).json({ message: error.message });
   }
 };
 

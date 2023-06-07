@@ -15,14 +15,27 @@ const mongoose = require("mongoose");
 const itemRoutes = require("./routes/itemRoutes");
 
 const authenticationRoutes = require("./routes/authenticationRoutes");
+const { verifyToken } = require("./middlewares/verifyJWT");
+const cookieParser = require("cookie-parser");
 
 app.use(cors());
 
+app.use(
+  express.urlencoded({
+    extended: false,
+  })
+);
+
 app.use(express.json());
 
-app.use("/items", itemRoutes);
+app.use(cookieParser());
 
 app.use("/auth", authenticationRoutes);
+
+// Any middleware that comes after verifyToken will go through jwt authentication
+// app.use(verifyToken);
+
+app.use("/items", verifyToken, itemRoutes);
 
 app.use("/", (req, res) => {
   res.send("Hello, Welcome to Shopping List API");

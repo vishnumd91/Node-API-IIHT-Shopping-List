@@ -1,20 +1,18 @@
 const UserSchema = require("../models/signup");
 
-// const bcrypt = require("bcrypt");
+const bcrypt = require("bcrypt");
 
 const registerUser = async (req, res) => {
   try {
     const { fullName, email, password, userName } = req.body;
-    // Will bring back this technique once the authorization is completetly done
     // Encrypting password by hashing
-    // const saltPassword = await bcrypt.genSalt(10);
-    // const hashedPassword = await bcrypt.hash(password, saltPassword);
+    const saltPassword = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, saltPassword);
 
     const user = new UserSchema({
       fullName,
       email,
-      // password: hashedPassword,
-      password,
+      password: hashedPassword,
       userName,
     });
     await user.save();

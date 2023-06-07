@@ -1,6 +1,7 @@
 const express = require("express");
 
 const { getItems, addItems, deleteItems } = require("../controllers/items");
+const { verifyToken } = require("../middlewares/verifyJWT");
 
 const router = express.Router();
 

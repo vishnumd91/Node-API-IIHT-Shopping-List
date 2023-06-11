@@ -32,7 +32,7 @@ const deleteItems = async (req, res) => {
   }
   await ShoppingData.findByIdAndRemove(id);
 
-  res.json({ message: "Deleted the Item Successfully" });
+  res.json(`Deleted the Item with ${id} Successfully`);
 };
 
 module.exports = {

@@ -26,20 +26,11 @@ const handleLogin = async (req, res) => {
     const accessToken = jwt.sign(
       { userName: foundUser.userName },
       process.env.ACCESS_TOKEN_SECRET_KEY,
-      { expiresIn: "30s" }
+      { expiresIn: "15m" }
     );
-
-    // const refreshToken = jwt.sign(
-    //   { userName: foundUser.userName },
-    //   process.env.REFRESH_TOKEN_SECRET_KEY,
-    //   { expiresIn: "1d" }
-    // );
-
-    res.status(200).json({ ...foundUser._doc, accessToken });
-    // res.cookie("jwt_token", refreshToken, {
-    //   httpOnly: true,
-    //   maxAge: 24 * 60 * 60 * 1000,
-    // });
+    // TODO: Refresh Token Implementation
+    res.cookie("access_token", accessToken, { httpOnly: true });
+    res.status(201).json("Authentication Successful");
   } else {
     return res.status(401).json("Invalid Credentials");
   }

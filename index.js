@@ -6,7 +6,7 @@ const dotenv = require("dotenv");
 
 dotenv.config();
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 10000;
 
 const cors = require("cors");
 
@@ -18,7 +18,21 @@ const authenticationRoutes = require("./routes/authenticationRoutes");
 const { verifyToken } = require("./middlewares/verifyJWT");
 const cookieParser = require("cookie-parser");
 
-app.use(cors());
+/* The credentials: true option is crucial as it allows the browser to include credentials 
+  (such as cookies) in the cross-origin request. */
+app.use(
+  cors({
+    origin: [
+      "http://localhost:3000",
+      "https://small-shopping-list.netlify.app",
+    ],
+    credentials: true,
+  })
+);
+
+/*  This line allows the server to respond to preflight requests sent by the browser 
+    to check the allowed methods and headers for the actual request. */
+app.options("*", cors());
 
 app.use(
   express.urlencoded({
@@ -34,7 +48,6 @@ app.use("/auth", authenticationRoutes);
 
 // Any middleware that comes after verifyToken will go through jwt authentication
 // app.use(verifyToken);
-
 app.use("/items", verifyToken, itemRoutes);
 
 app.use("/", (req, res) => {
@@ -50,6 +63,6 @@ mongoose
   })
   .then(
     mongoose.connection.once("open", () => {
-      console.log("MongoDB Connected Succesfully");
+      console.log("MongoDB Connected Successfully");
     })
   );

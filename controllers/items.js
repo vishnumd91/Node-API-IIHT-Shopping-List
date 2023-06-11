@@ -2,8 +2,11 @@ const mongoose = require("mongoose");
 const ShoppingData = require("../models/shoppingList");
 
 const getItems = async (req, res) => {
+  // After JWT authentication, userName has been already set in req object using verifyJWT middleware.
+  const { userName } = req;
+
   try {
-    const shoppingItems = await ShoppingData.find();
+    const shoppingItems = await ShoppingData.find({ userName });
 
     return res.status(200).json(shoppingItems);
   } catch (error) {

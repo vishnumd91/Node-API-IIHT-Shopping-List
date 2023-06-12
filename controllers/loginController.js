@@ -30,7 +30,7 @@ const handleLogin = async (req, res) => {
     );
     // TODO: Refresh Token Implementation
     res.cookie("access_token", accessToken, { httpOnly: true });
-    res.status(201).json("Authentication Successful");
+    res.status(201).json({ ...foundUser._doc });
   } else {
     return res.status(401).json("Invalid Credentials");
   }

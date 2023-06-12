@@ -26,6 +26,7 @@ app.use(
       "http://localhost:3000",
       "https://small-shopping-list.netlify.app",
       "https://iiht-shopping-list.vercel.app",
+      "https://iiht-shopping-list.onrender.com",
     ],
     credentials: true,
     exposedHeaders: ["set-cookie"],

@@ -25,6 +25,7 @@ app.use(
     origin: [
       "http://localhost:3000",
       "https://small-shopping-list.netlify.app",
+      "https://iiht-shopping-list.vercel.app",
     ],
     credentials: true,
     exposedHeaders: ["set-cookie"],

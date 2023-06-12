@@ -32,7 +32,7 @@ const handleLogin = async (req, res) => {
     res.cookie("access_token", accessToken, {
       httpOnly: true,
       secure: true,
-      domain: "https://small-shopping-list.netlify.app",
+      domain: "https://iiht-shopping-list.vercel.app",
       sameSite: "none",
     });
     res.status(201).json({ ...foundUser._doc });

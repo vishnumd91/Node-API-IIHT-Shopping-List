@@ -33,6 +33,7 @@ const handleLogin = async (req, res) => {
       httpOnly: true,
       secure: true,
       domain: "https://small-shopping-list.netlify.app",
+      sameSite: "none",
     });
     res.status(201).json({ ...foundUser._doc });
   } else {

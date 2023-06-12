@@ -27,6 +27,7 @@ app.use(
       "https://small-shopping-list.netlify.app",
     ],
     credentials: true,
+    exposedHeaders: ["set-cookie"],
   })
 );
 

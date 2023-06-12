@@ -29,7 +29,7 @@ const handleLogin = async (req, res) => {
       { expiresIn: "15m" }
     );
     // TODO: Refresh Token Implementation
-    res.cookie("access_token", accessToken, { httpOnly: true });
+    res.cookie("access_token", accessToken, { httpOnly: true, secure: true });
     res.status(201).json({ ...foundUser._doc });
   } else {
     return res.status(401).json("Invalid Credentials");

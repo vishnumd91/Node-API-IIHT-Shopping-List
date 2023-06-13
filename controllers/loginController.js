@@ -22,6 +22,7 @@ const handleLogin = async (req, res) => {
   const isPasswordMatching = await bcrypt.compare(password, foundUser.password);
 
   if (isPasswordMatching) {
+    const { userName } = foundUser._doc;
     // JWT Authentication goes here
     const accessToken = jwt.sign(
       { userName: foundUser.userName },
@@ -29,13 +30,13 @@ const handleLogin = async (req, res) => {
       { expiresIn: "15m" }
     );
     // TODO: Refresh Token Implementation
-    res.cookie("access_token", accessToken, {
-      httpOnly: true,
-      secure: true,
-      domain: "https://iiht-shopping-list.vercel.app",
-      sameSite: "none",
-    });
-    res.status(201).json({ ...foundUser._doc });
+    // res.cookie("access_token", accessToken, {
+    //   httpOnly: true,
+    //   secure: true,
+    //   domain: "https://iiht-shopping-list.vercel.app",
+    //   sameSite: "none",
+    // });
+    res.status(201).json({ userName, accessToken });
   } else {
     return res.status(401).json("Invalid Credentials");
   }

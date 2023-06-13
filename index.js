@@ -28,8 +28,8 @@ app.use(
       "https://iiht-shopping-list.vercel.app",
       "https://iiht-shopping-list.onrender.com",
     ],
-    credentials: true,
-    exposedHeaders: ["set-cookie"],
+    // credentials: true,
+    // exposedHeaders: ["set-cookie"],
   })
 );
 

@@ -27,7 +27,7 @@ app.use(
       "https://small-shopping-list.netlify.app",
       "https://iiht-shopping-list.vercel.app",
       "https://iiht-shopping-list.onrender.com",
-      "http://172.190.149.196:3000/",
+      "http://172.190.149.196:3000",
     ],
     // credentials: true,
     // exposedHeaders: ["set-cookie"],

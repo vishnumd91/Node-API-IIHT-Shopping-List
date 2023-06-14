@@ -30,13 +30,11 @@ const handleLogin = async (req, res) => {
       { expiresIn: "15m" }
     );
     // TODO: Refresh Token Implementation
-    // res.cookie("access_token", accessToken, {
-    //   httpOnly: true,
-    //   secure: true,
-    //   domain: "https://iiht-shopping-list.vercel.app",
-    //   sameSite: "none",
-    // });
-    res.status(201).json({ userName, accessToken });
+    res.cookie("access_token", accessToken, {
+      httpOnly: true,
+      secure: true,
+    });
+    res.status(201).json({ userName });
   } else {
     return res.status(401).json("Invalid Credentials");
   }

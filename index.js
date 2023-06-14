@@ -29,8 +29,8 @@ app.use(
       "https://iiht-shopping-list.onrender.com",
       "http://172.190.149.196:3000",
     ],
-    // credentials: true,
-    // exposedHeaders: ["set-cookie"],
+    credentials: true,
+    exposedHeaders: ["set-cookie"],
   })
 );
 

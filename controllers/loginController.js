@@ -33,6 +33,7 @@ const handleLogin = async (req, res) => {
     res.cookie("access_token", accessToken, {
       httpOnly: true,
       secure: true,
+      sameSite: "none",
     });
     res.status(201).json({ userName });
   } else {
